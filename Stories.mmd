@@ -1,0 +1,49 @@
+graph LR
+
+%% Story level examples
+BalanceLLB[Balance Story LLB Small Loans]
+BalanceMid[Balance Story Mid Balance]
+BalanceHigh[Balance Story High Balance]
+GeoSlow[Geography Slow States Example Texas New York]
+GeoFast[Geography Fast States Example Florida Arizona]
+SeasonNew[Seasoning New Loans]
+SeasonBurn[Seasoning Burnout Seasoned Loans]
+WACLow[WAC Near Market Little Refi Incentive]
+WACHigh[WAC High Above Market Strong Refi Incentive]
+OccInv[Occupancy Investor Second Homes]
+OccOO[Occupancy Owner Occupied]
+OrigBank[Originator Large Bank]
+OrigBroker[Originator Broker Non Bank]
+
+%% Map stories to prepayment behavior
+BalanceLLB --> SlowPrepay[Slower Prepayments]
+GeoSlow --> SlowPrepay
+SeasonBurn --> SlowPrepay
+WACLow --> SlowPrepay
+OccInv --> SlowPrepay
+OrigBank --> SlowPrepay
+
+BalanceHigh --> FastPrepay[Faster Prepayments]
+GeoFast --> FastPrepay
+SeasonNew --> FastPrepay
+WACHigh --> FastPrepay
+OccOO --> FastPrepay
+OrigBroker --> FastPrepay
+
+%% Prepayments to duration and value
+SlowPrepay --> LongerDuration[Longer Duration More Stable Cashflows]
+FastPrepay --> ShorterDuration[Shorter Duration Less Stable Cashflows]
+
+LongerDuration --> HigherValue[Higher Value To Investor]
+ShorterDuration --> LowerValue[Lower Value To Investor]
+
+%% Value to spec payup
+HigherValue --> HigherPayup[Higher Spec Payup Over TBA]
+LowerValue --> LowerPayup[Lower Spec Payup Or Discount]
+
+%% Spec payup to tiers
+HigherPayup --> Tier1Plus[Tier 1 Plus Premium Stories]
+HigherPayup --> Tier1[Tier 1 Strong Stories]
+HigherPayup --> Tier2[Tier 2 Moderate Stories]
+LowerPayup --> Tier3[Tier 3 Weak Stories]
+LowerPayup --> TierGeneric[Generic TBA Deliverable]
